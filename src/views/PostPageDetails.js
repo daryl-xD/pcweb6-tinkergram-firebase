@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import Navigation from "../components/navigation";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 
 export default function PostPageDetails() {
@@ -17,6 +18,15 @@ export default function PostPageDetails() {
 
 
   async function deletePost(id) {
+    const postDocument = await getDoc(doc(db, "posts", id));
+    const post = postDocument.data();
+    const storage = getStorage();
+    const desertRef = ref(storage, `images/${post.imageName}`);
+    deleteObject(desertRef).then(() => {
+console.log("File deleted successfully");
+    }).catch((error) => {
+      console.error("Error removing file: ", error);
+    });
     await deleteDoc(doc(db, "posts", id));
     navigate("/");
   }
