@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { signOut } from "firebase/auth";
+import Navigation from "../components/navigation";
 
 
 export default function PostPageUpdate() {
@@ -36,15 +36,7 @@ export default function PostPageUpdate() {
 
   return (
     <div>
-      <Navbar variant="light" bg="light">
-        <Container>
-          <Navbar.Brand href="/">Tinkergram</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/add">New Post</Nav.Link>
-            <Nav.Link onClick={(e) => signOut(auth)}>🚪</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      <Navigation />
       <Container>
         <h1 style={{ marginBlock: "1rem" }}>Update Post</h1>
         <Form>
