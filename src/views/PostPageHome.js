@@ -28,7 +28,7 @@ export default function PostPageHome() {
 
   return (
     <>
-      <Navigation />`
+      <Navigation />
       <Container>
         <Row>
           <ImagesRow />
